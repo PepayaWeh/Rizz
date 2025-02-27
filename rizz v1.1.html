@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: rgb(255, 170, 187);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            margin-top: 20vh;
+        }
+        .button {
+            font-size: 20px;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .yes {
+            background-color: red;
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.6);
+        }
+        .no {
+            background-color: white;
+            color: red;
+            position: none;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.6);
+        }
+        .hearts, .heartbreaks {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .heart, .heartbreak {
+            position: absolute;
+            font-size: 24px;
+            animation: float 2s linear infinite;
+        }
+        @keyframes float {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-100px); opacity: 0; }
+        }
+        .emoji {
+            position: absolute;
+            font-size: 40px;
+            animation: pop 1.5s ease-out infinite;
+        }
+        @keyframes pop {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will you be my Mine?</h1>
+        <button class="button yes" onclick="loveBomb()">💖 Yes 💖</button>
+        <button class="button no" onclick="moveNoButton(); heartbreakBomb();">💔 No 💔</button>
+    </div>
+    <div class="hearts" id="hearts"></div>
+    <div class="heartbreaks" id="heartbreaks"></div>
+
+    <script>
+        function moveNoButton() {
+            const noButton = document.querySelector('.no');
+            noButton.style.top = Math.random() * 80 + 'vh';
+            noButton.style.left = Math.random() * 80 + 'vw';
+        }
+
+        function loveBomb() {
+            const heartContainer = document.getElementById('hearts');
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️💖💞';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.animationDuration = Math.random() * 2 + 1 + 's';
+                heartContainer.appendChild(heart);
+                setTimeout(() => heart.remove(), 2000);
+            }
+            for (let i = 0; i < 15; i++) {
+                let emoji = document.createElement('div');
+                emoji.classList.add('emoji');
+                emoji.innerHTML = ['😍', '💘', '💝', '💕', '🥰'][Math.floor(Math.random() * 5)];
+                emoji.style.left = Math.random() * 100 + 'vw';
+                emoji.style.top = Math.random() * 100 + 'vh';
+                emoji.style.animationDuration = Math.random() * 1.5 + 1 + 's';
+                heartContainer.appendChild(emoji);
+                setTimeout(() => emoji.remove(), 2000);
+            }
+        }
+
+        function heartbreakBomb() {
+            const heartbreakContainer = document.getElementById('heartbreaks');
+            for (let i = 0; i < 20; i++) {
+                let heartbreak = document.createElement('div');
+                heartbreak.classList.add('heartbreak');
+                heartbreak.innerHTML = '💔😢🥀';
+                heartbreak.style.left = Math.random() * 100 + 'vw';
+                heartbreak.style.top = Math.random() * 100 + 'vh';
+                heartbreak.style.animationDuration = Math.random() * 2 + 1 + 's';
+                heartbreakContainer.appendChild(heartbreak);
+                setTimeout(() => heartbreak.remove(), 2000);
+            }
+        }
+    </script>
+</body>
+</html>
